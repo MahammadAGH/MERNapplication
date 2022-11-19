@@ -34,12 +34,6 @@ const Profile = () => {
           >
             Posts
           </button>
-          <button
-            className={saveTab ? "active" : ""}
-            onClick={() => setSaveTab(true)}
-          >
-            Saved
-          </button>
         </div>
       )}
 
@@ -47,11 +41,7 @@ const Profile = () => {
         <img className="d-block mx-auto" src={LoadIcon} alt="loading" />
       ) : (
         <>
-          {saveTab ? (
-            <Saved auth={auth} dispatch={dispatch} />
-          ) : (
-            <Posts auth={auth} profile={profile} dispatch={dispatch} id={id} />
-          )}
+          <Posts auth={auth} profile={profile} dispatch={dispatch} id={id} />
         </>
       )}
     </div>

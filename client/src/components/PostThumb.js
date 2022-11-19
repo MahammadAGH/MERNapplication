@@ -2,39 +2,41 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import CardBody from "./home/post_card/CardBody";
+import CardFooter from "./home/post_card/CardFooter";
+
+import Comments from "./home/Comments";
+
+
 const PostThumb = ({ posts, result }) => {
   const { theme } = useSelector((state) => state);
 
   if (result === 0) return <h2 className="text-center text-danger">No Post</h2>;
 
   return (
-    <div className="post_thumb">
+    <div className="post_thumb"> 
       {posts.map((post) => (
         <Link key={post._id} to={`/post/${post._id}`}>
-          <div className="post_thumb_display">
-            {post.images[0].url.match(/video/i) ? (
-              <video
-                controls
-                src={post.images[0].url}
-                alt={post.images[0].url}
-                style={{ filter: theme ? "invert(1)" : "invert(0)" }}
-              />
-            ) : (
-              <img
-                src={post.images[0].url}
-                alt={post.images[0].url}
-                style={{ filter: theme ? "invert(1)" : "invert(0)" }}
-              />
-            )}
+        <div className="card my-3">
+            
+            <h6 style={{ padding: "5px", cursor: "pointer", color: "blue" }}>
+              {post.content}
+            </h6>
+            <div className="d-flex justify-content-between">
+            
 
-            <div className="post_thumb_menu">
-              <i className="far fa-heart">{post.likes.length}</i>
-              <i className="far fa-comment">{post.comments.length}</i>
-            </div>
+            <h6 style={{ padding: "0 25px", cursor: "pointer", color: "red" }}>
+              {post.likes.length} likes
+            </h6>
+
+            <h6 style={{ padding: "0 25px", cursor: "pointer", color: "red" }}>
+              {post.comments.length} comments
+            </h6>
           </div>
+        </div>
         </Link>
-      ))}
-    </div>
+      ))} 
+    </div> 
   );
 };
 
