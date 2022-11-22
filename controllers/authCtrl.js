@@ -6,8 +6,10 @@ const authCtrl = {
   register: async (req, res) => {
     try {
       const { fullname, username, email, password, gender } = req.body;
+      
+     
       let newUserName = username.toLowerCase().replace(/ /g, "");
-
+      
       const user_name = await Users.findOne({ username: newUserName });
       if (user_name)
         return res.status(400).json({ msg: "This user name already exists." });
@@ -16,10 +18,14 @@ const authCtrl = {
       if (user_email)
         return res.status(400).json({ msg: "This email already exists." });
 
-      if (password.length < 6)
+      if (password.length < 8)
         return res
           .status(400)
-          .json({ msg: "Password must be at least 6 characters." });
+          .json({ msg: "Password must be at least 8 characters." });
+      if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/))
+        return res
+          .status(400)
+          .json({ msg: "Password must contains at least one lower case, one upper case, one numerical and one special character" });
 
       const passwordHash = await bcrypt.hash(password, 12);
 

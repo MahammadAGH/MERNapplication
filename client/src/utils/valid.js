@@ -5,12 +5,16 @@ const valid = ({ fullname, username, email, password, cf_password }) => {
     err.fullname = "Please add your full name.";
   } else if (fullname.length > 25) {
     err.fullname = "Full name is up to 25 characters long.";
-  }
+  } else if (fullname.length < 5) {
+    err.fullname = "Full name must be minimum 5 characters"
+  } 
 
   if (!username) {
     err.username = "Please add your user name.";
   } else if (username.replace(/ /g, "").length > 25) {
     err.username = "User name is up to 25 characters long.";
+  } else if (username.length < 3) {
+    err.username = "User name must be minimum 3 characters";
   }
 
   if (!email) {
@@ -21,8 +25,10 @@ const valid = ({ fullname, username, email, password, cf_password }) => {
 
   if (!password) {
     err.password = "Please add your password.";
-  } else if (password.length < 6) {
-    err.password = "Password must be at least 6 characters.";
+  } else if (password.length < 8) {
+    err.password = "Password must be at least 8 characters.";
+  } else if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)) {
+    err.password = "Password must contains at least one lower case, one upper case, one numerical and one special character";
   }
 
   if (password !== cf_password) {
