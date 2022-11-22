@@ -64,11 +64,11 @@ const authCtrl = {
       );
 
       if (!user)
-        return res.status(400).json({ msg: "This email does not exist." });
+        return res.status(400).json({ msg: "Email or Password Incorrect." });
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
-        return res.status(400).json({ msg: "Password is incorrect." });
+        return res.status(400).json({ msg: "Email or Password Incorrect." });
 
       const access_token = createAccessToken({ id: user._id });
       const refresh_token = createRefreshToken({ id: user._id });
