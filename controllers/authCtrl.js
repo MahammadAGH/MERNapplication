@@ -112,7 +112,7 @@ const authCtrl = {
 
       jwt.verify(
         rf_token,
-        kbctvqwcnqwcxwqunmkjaksxfcrw,
+        'kbctvqwcnqwcxwqunmkjaksxfcrw',
         async (err, result) => {
           if (err) return res.status(400).json({ msg: "Please login now." });
 
@@ -141,13 +141,13 @@ const authCtrl = {
 };
 
 const createAccessToken = (payload) => {
-  return jwt.sign(payload, jhgcsncwqofmjansgvtcqqwvxplqw, {
+  return jwt.sign(payload, 'jhgcsncwqofmjansgvtcqqwvxplqw', {
     expiresIn: "1d",
   });
 };
 
 const createRefreshToken = (payload) => {
-  return jwt.sign(payload, kbctvqwcnqwcxwqunmkjaksxfcrw, {
+  return jwt.sign(payload, 'kbctvqwcnqwcxwqunmkjaksxfcrw', {
     expiresIn: "30d",
   });
 };
