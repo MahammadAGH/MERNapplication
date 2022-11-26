@@ -31,7 +31,7 @@ app.use("/api", require("./routes/commentRouter"));
 app.use("/api", require("./routes/notifyRouter"));
 app.use("/api", require("./routes/messageRouter"));
 
-const URI = process.env.MONGODB_URL;
+const URI = 'mongodb+srv://mahammad:MERNdeveloper2022@cluster0.yhgcl92.mongodb.net/chatpost?retryWrites=true&w=majority';
 mongoose.connect(
   URI,
   {
@@ -45,8 +45,8 @@ mongoose.connect(
     console.log("Connected to mongodb");
   }
 );
-
-if (process.env.NODE_ENV === "production") {
+var NODE_ENV = "production";
+if (NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
